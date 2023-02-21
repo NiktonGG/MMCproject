@@ -2,16 +2,22 @@
 using System.Net.Mail;
 using System.Net;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using PP;
+using System.Reflection.Emit;
+using AngleSharp.Dom;
 
 namespace WindowsFormsApp1
 {
     public partial class Email : Form
     {
         private string idFile;
-        public Email(string id)
+        List<Rootobject> rootobjects;
+        public Email(string id, List<Rootobject> fileObjects)
         {
             InitializeComponent();
             this.idFile = id;
+            rootobjects = fileObjects;
         }
         /// <summary>
         /// Отправка электронного письма 
@@ -64,9 +70,17 @@ namespace WindowsFormsApp1
             Hide();
         }
 
+        string nameFile;
         private void Email_Load(object sender, EventArgs e)
         {
-            string messageTxt = "<h3 class=\"float-md-start mb-0\" style=\"font-family: 'Start'\">\r\n    ММЦ:<span style=\"color:blue\">ВТ</span> \r\n  </h3>\r\n  <h1><span style=\"font-family: 'Start'; color:red;\">Оповещение о изменении документа № КР" + idFile + "</span></h1>\r\n";
+            foreach(var el in rootobjects)
+            {
+                if(el.id == idFile)
+                {
+                    nameFile = el.name;
+                }
+            }
+            string messageTxt = "<h3 class=\"float-md-start mb-0\" style=\"font-family: 'Start'\">\r\n    ММЦ:<span style=\"color:blue\">ВТ</span> \r\n  </h3>\r\n  <h1><span style=\"font-family: 'Start'; color:red;\">Оповещение о изменении документа № КР" + idFile + " - " + nameFile + "</span></h1>\r\n";
             textBox6.Text = messageTxt;        
         }
     }

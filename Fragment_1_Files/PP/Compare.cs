@@ -27,7 +27,7 @@ namespace WindowsFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Email email = new Email(comboBoxAct.Text);
+            Email email = new Email(comboBoxAct.Text.Trim(' '), formMain.changedAfter);
             email.ShowDialog();
         }
 

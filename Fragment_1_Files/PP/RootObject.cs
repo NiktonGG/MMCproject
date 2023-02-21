@@ -10,6 +10,8 @@ namespace PP
     {
         public DateTime publish_date { get; set; }
         public Obj obj { get; set; }
+        public string name { get; set; }
+        public string id { get; set; }
 
         public class Obj
         {
